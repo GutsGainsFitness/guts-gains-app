@@ -1,0 +1,1 @@
+DELETE FROM public.admin_notifications WHERE metadata->>'email' = 'e2e-verified-domain@example.com';

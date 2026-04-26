@@ -1,0 +1,1 @@
+DELETE FROM public.admin_notifications WHERE id = '1d92745b-fba3-4a75-95cb-34e04565d5fc';

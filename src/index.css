@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 72% 51%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 55%;
+
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 0 72% 51%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 0 72% 51%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 16%;
+    --sidebar-ring: 0 72% 51%;
+
+    /* Custom tokens */
+    --surface: 0 0% 10%;
+    --surface-foreground: 0 0% 90%;
+    --highlight: 0 72% 51%;
+    --highlight-subtle: 0 72% 51% / 0.08;
+    --gradient-red: linear-gradient(135deg, hsl(0, 72%, 51%), hsl(0, 72%, 38%));
+    --gradient-dark: linear-gradient(180deg, hsl(0, 0%, 4%), hsl(0, 0%, 8%));
+    --shadow-red: 0 8px 32px -8px hsl(0 72% 51% / 0.35);
+    --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 40px -8px hsl(0 72% 51% / 0.25);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .text-gradient-red {
+    background: linear-gradient(135deg, hsl(0, 72%, 55%), hsl(0, 72%, 42%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-surface {
+    background-color: hsl(var(--surface));
+  }
+
+  .bg-highlight-subtle {
+    background-color: hsl(var(--highlight-subtle));
+  }
+
+  .shadow-red {
+    box-shadow: var(--shadow-red);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .section-padding {
+    @apply px-4 py-20 md:px-8 md:py-28 lg:px-16 lg:py-36;
+  }
+
+  .container-tight {
+    @apply mx-auto max-w-6xl;
+  }
+
+  /* ----- Mobile-app safe-area utilities (Android status bar / iOS notch & home indicator) ----- */
+  .safe-pt { padding-top: env(safe-area-inset-top); }
+  .safe-pb { padding-bottom: env(safe-area-inset-bottom); }
+  .safe-pl { padding-left: env(safe-area-inset-left); }
+  .safe-pr { padding-right: env(safe-area-inset-right); }
+  .safe-px { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+  .safe-py { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+  /* Add a fixed gap above the env() value so content never collides with system UI */
+  .safe-pt-4 { padding-top: calc(env(safe-area-inset-top) + 1rem); }
+  .safe-pb-4 { padding-bottom: calc(env(safe-area-inset-bottom) + 1rem); }
+  /* Reserve space at the bottom of scrollable app screens so the BottomNav never covers content */
+  .pb-bottomnav { padding-bottom: calc(env(safe-area-inset-bottom) + 4.5rem); }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(0, 0%, 4%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(0, 0%, 18%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(0, 72%, 51%);
+}
+
+/* Focus states */
+*:focus-visible {
+  outline: 2px solid hsl(0, 72%, 51%);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: hsl(0, 72%, 51% / 0.3);
+  color: hsl(0, 0%, 95%);
+}
+
+/* App reusable form input */
+@layer components {
+  .input {
+    @apply w-full px-3 py-2.5 bg-background border border-border rounded-sm text-sm text-foreground focus:outline-none focus:border-primary transition-colors;
+  }
+
+  /* Blog & rich-text editor content styling */
+  .prose-custom {
+    @apply text-foreground/80 leading-relaxed;
+  }
+  .prose-custom p {
+    @apply mb-5 leading-relaxed;
+  }
+  .prose-custom h1,
+  .prose-custom h2 {
+    @apply font-heading text-2xl md:text-3xl text-foreground mt-10 mb-4 tracking-wide;
+  }
+  .prose-custom h3 {
+    @apply font-heading text-xl text-foreground mt-8 mb-3 tracking-wide;
+  }
+  .prose-custom ul {
+    @apply list-disc pl-6 mb-5 space-y-2;
+  }
+  .prose-custom ol {
+    @apply list-decimal pl-6 mb-5 space-y-2;
+  }
+  .prose-custom li {
+    @apply leading-relaxed;
+  }
+  .prose-custom blockquote {
+    @apply border-l-2 border-primary pl-5 italic text-foreground/70 my-6;
+  }
+  .prose-custom a {
+    @apply text-primary underline underline-offset-2 hover:text-primary/80 transition-colors;
+  }
+  .prose-custom strong {
+    @apply text-foreground font-semibold;
+  }
+  .prose-custom em {
+    @apply italic;
+  }
+  .prose-custom hr {
+    @apply border-border my-8;
+  }
+  .prose-custom img {
+    @apply rounded-sm my-6 max-w-full h-auto;
+  }
+  .prose-custom code {
+    @apply px-1.5 py-0.5 bg-card text-foreground text-sm rounded-sm border border-border;
+  }
+  .prose-custom pre {
+    @apply p-4 bg-card border border-border rounded-sm overflow-x-auto my-5;
+  }
+  .prose-custom .is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    @apply text-muted-foreground float-left h-0 pointer-events-none;
+  }
+}
